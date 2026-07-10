@@ -368,21 +368,31 @@ ${sourceText}`
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     model: MODEL_NAME,
-                    messages: [{
-                        role: 'user',
-                        content: [
-                            {
-                                type: 'text',
-                                text: '请将图片中的表格准确无误地完整提取出来，必须使用标准的纯 CSV（逗号分隔值）格式输出。特别注意：\\n1. 必须准确识别并保留表头（第一行或前几行的标题行）！\\n2. 表头是表格最重要的部分，绝对不能漏掉！\\n3. 必须识别完整的表格，无论图片中有多少行数据，都要一行不漏地全部提取出来！即使表格很长也必须完整输出！\\n4. 不要有任何多余解释说明文字。\\n5. 不要使用 ```csv 等 Markdown 代码块语法包裹，只返回干净的文本！\\n6. 每一个单元格数据用英文逗号分隔，如果有空单元格，必须保留对应的逗号占位。\\n7. 坚决不能漏掉表格原有的任何一行或一列！完整性是最重要的！'
-                            },
-                            {
-                                type: 'image_url',
-                                image_url: { url: imageDataUrl }
-                            }
-                        ]
-                    }],
-                    max_tokens: 32768,
-                    temperature: 0.05
+                    messages: [
+                        {
+                            role: 'user',
+                            content: [
+                                {
+                                    type: 'text',
+                                    text: `你是一个专业的表格数据提取专家。请将图片中的表格以 CSV 格式完整提取出来。
+
+严格要求（不遵守会导致严重后果）：
+1. 必须提取图片中表格的所有行，一行都不能少！即使表格有 100 行也要全部提取！
+2. 保留表头！
+3. 不要有任何解释文字，只给我 CSV！
+4. 不要用 Markdown 包裹，直接给我纯文本！
+5. 不要中途停止！必须输出完整！
+6. 即使输出很长也要继续输出！完整性高于一切！`
+                                },
+                                {
+                                    type: 'image_url',
+                                    image_url: { url: imageDataUrl }
+                                }
+                            ]
+                        }
+                    ],
+                    max_tokens: 65536,
+                    temperature: 0.0001
                 })
             });
 
@@ -398,6 +408,7 @@ ${sourceText}`
                 // 调试信息：检测输出长度
                 const lineCount = content.split('\\n').length;
                 console.log('[表格识别] 识别到 ' + lineCount + ' 行数据');
+                console.log('[表格识别] 完整输出：', content);
                 
                 return content;
             }
