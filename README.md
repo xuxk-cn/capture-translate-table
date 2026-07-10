@@ -195,18 +195,9 @@ http://localhost:8081/v1/chat/completions
 
 ### 打赏支持
 
-插件弹窗中已经集成打赏入口，支持：
+如果你喜欢这个项目，欢迎支持一下，能让我继续把它打磨得更顺手。
 
-- 微信
-- 支付宝
-
-如果你喜欢这个项目，请打赏一杯咖啡！谢谢！
-
-| 微信支付 | 支付宝支付 |
-| :-----: | :------: |
-| <img src="微信收款码.png" alt="微信收款码" width="200"> | <img src="支付宝收款码.jpg" alt="支付宝收款码" width="200"> |
-
-也可以通过 PayPal 支持：
+你可以通过 PayPal 支持：
 - [PayPal.me/xuxinkuan](https://www.paypal.me/xuxinkuan)
 
 ### 适用场景
@@ -376,7 +367,6 @@ manifest.json    extension manifest
 popup.html       popup UI
 popup.js         popup actions
 xlsx.full.min.js Excel export library
-drink-coffee/    donation assets
 ```
 
 ### Known Limitations
@@ -388,7 +378,8 @@ drink-coffee/    donation assets
 
 ### Support
 
-The popup includes donation support via WeChat and Alipay. Related assets are stored in the `drink-coffee/` directory.
+If you like this project and want to support it, you can donate via PayPal:
+- [PayPal.me/xuxinkuan](https://www.paypal.me/xuxinkuan)
 
 ## Deutsch
 
