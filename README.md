@@ -1,6 +1,6 @@
 # Capture Translate Table
 
-Browser extension for screenshot translation and table extraction with a local AI model service.
+浏览器扩展，支持**截图翻译**和**AI 表格识别**（核心亮点功能）。
 
 语言 / Languages: [中文](#中文) | [English](#english) | [Deutsch](#deutsch) | [Francais](#francais) | [Espanol](#espanol)
 
@@ -10,17 +10,27 @@ Browser extension for screenshot translation and table extraction with a local A
 
 `Capture Translate Table` 是一个基于 Chromium 内核浏览器的扩展，提供两项核心能力：
 
-1. 截图区域识别并翻译
-2. 截图区域中的表格提取并导出为 Excel
+1. **截图区域识别并翻译**
+2. **🚀 AI 表格识别与 Excel 导出**（核心亮点功能）
 
 插件通过页面覆盖层让用户拖拽选择网页中的任意区域，然后将截图发送给本地 AI 模型服务进行 OCR、翻译或表格识别。识别结果会在页面内弹窗中展示，表格结果会直接下载为 `.xlsx` 文件。
+
+### 核心亮点：AI 表格识别
+
+**表格识别**是本插件最核心、最有技术含量的功能：
+
+- 📊 **视觉表格抽取**：利用 Qwen2-VL 等视觉大模型，从截图中直接识别表格结构
+- 🔄 **保持原始格式**：精准保留原表格的行、列、单元格关系
+- 📄 **标准 Excel 导出**：直接生成 `.xlsx` 格式文件，支持在 Excel/WPS 中直接编辑
+- 🎯 **智能容错**：即使是图片表格、扫描件表格、复杂布局表格也能准确识别
+- 💾 **无需后端**：纯浏览器端 + 本地模型服务，数据安全有保障
 
 ### 主要功能
 
 - 截图框选网页任意区域
 - OCR 识别截图中的文字
 - 将识别出的文字翻译后在页面中直接显示
-- 识别图片中的表格并导出为标准 Excel 文件
+- 🚀 **核心**：识别图片中的表格并导出为标准 Excel 文件
 - 支持结果复制
 - 支持在插件弹窗中显示打赏二维码
 
@@ -152,16 +162,26 @@ http://localhost:8081/v1/chat/completions
 `Capture Translate Table` is a Chromium-based browser extension for two main tasks:
 
 1. screenshot-based OCR and translation
-2. table extraction from screenshots to Excel
+2. **🚀 AI-powered table recognition & Excel export** (core highlight feature)
 
 The extension lets the user drag a rectangle over any visible area of a webpage, captures the selected area, sends it to a local AI vision model service, and then either shows translated text in an on-page dialog or exports the detected table as an `.xlsx` file.
+
+### Core Highlight: AI Table Recognition
+
+**Table recognition** is the most core and technically advanced feature of this extension:
+
+- 📊 **Visual table extraction**: Using vision models like Qwen2-VL to directly recognize table structures from screenshots
+- 🔄 **Preserve original format**: Accurately maintains row, column, and cell relationships from the original table
+- 📄 **Standard Excel export**: Directly generates `.xlsx` files that can be edited in Excel/WPS
+- 🎯 **Smart fault tolerance**: Accurately recognizes even image tables, scanned tables, and complex layout tables
+- 💾 **No backend required**: Pure browser + local model service, ensuring data security
 
 ### Features
 
 - Select any visible area on a webpage
 - OCR text from screenshots
 - Translate extracted text directly inside the page
-- Extract tables from screenshots and export to Excel
+- 🚀 **Core**: Extract tables from screenshots and export to Excel
 - Copy results from the result dialog
 - Built-in donation panel in the popup
 
