@@ -24,6 +24,8 @@
 - 📄 **标准 Excel 导出**：直接生成 `.xlsx` 格式文件，支持在 Excel/WPS 中直接编辑
 - 🎯 **智能容错**：即使是图片表格、扫描件表格、复杂布局表格也能准确识别
 - 💾 **无需后端**：纯浏览器端 + 本地模型服务，数据安全有保障
+- 🏷️ **表格标题提取**：自动识别并保留表格上方的标题/题头（如"Folha de pagamento..."这类文字），并作为 Excel 首行导出
+- 🌍 **多语言表头支持**：对中文、英文、日文、韩文、德文、法文、西班牙文、葡萄牙文、俄文等各种语言的表头都能准确识别
 
 ### 主要功能
 
@@ -31,6 +33,8 @@
 - OCR 识别截图中的文字
 - 将识别出的文字翻译后在页面中直接显示
 - 🚀 **核心**：识别图片中的表格并导出为标准 Excel 文件
+- 🏷️ 自动识别并保留表格标题/题头
+- 🌍 多语言表头支持（中文/英文/日文/韩文/德文/法文/西班牙文/葡萄牙文/俄文）
 - 支持结果复制
 - 支持在插件弹窗中显示打赏二维码
 
@@ -184,6 +188,12 @@ http://localhost:8081/v1/chat/completions
 - [`popup.html`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/popup.html)
 - [`popup.js`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/popup.js)
 
+如果你想修改表格识别和标题提取的提示词与流程：
+
+- [`content.js:L370-L425`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/content.js#L370-L425) 表格提取流程
+- [`content.js:L427-L476`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/content.js#L427-L476) 标题识别流程
+- [`content.js:L478-L493`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/content.js#L478-L493) CSV 首行拼接逻辑
+
 ### 打赏支持
 
 插件弹窗中已经集成打赏入口，支持：
@@ -234,6 +244,8 @@ The extension lets the user drag a rectangle over any visible area of a webpage,
 - OCR text from screenshots
 - Translate extracted text directly inside the page
 - 🚀 **Core**: Extract tables from screenshots and export to Excel
+- 🏷️ Auto-detect and preserve table title/caption
+- 🌍 Multi-language header support (Chinese/English/Japanese/Korean/German/French/Spanish/Portuguese/Russian)
 - Copy results from the result dialog
 - Built-in donation panel in the popup
 

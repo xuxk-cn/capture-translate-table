@@ -229,8 +229,12 @@ if (document.getElementById('screenshot-overlay')) {
 
                 } else if (mode === 'table') {
                     // Table Extract (视觉直接输出 CSV) → XLSX 生成并下载
+                    updateLoadingText('🧾 正在识别表格标题...');
+                    const tableTitle = await extractTableTitleFromImage(croppedDataUrl);
+
                     updateLoadingText('📊 正在由 AI 视觉抽取表格...');
-                    const csvData = await extractTableFromImage(croppedDataUrl);
+                    let csvData = await extractTableFromImage(croppedDataUrl);
+                    csvData = prependTitleRowToCsv(csvData, tableTitle);
                     
                     updateLoadingText('💾 正在生成标准化 Excel 文件...');
                     await exportToExcel(csvData);
@@ -379,14 +383,15 @@ ${sourceText}`
 
 STRICT REQUIREMENTS:
 1. Extract EVERY SINGLE ROW from the table - NO ROWS LEFT BEHIND!
-2. **CRITICAL: PRESERVE ALL HEADER ROW(S) IN THEIR ORIGINAL LANGUAGE!** The header is the top row(s) with column titles, which may be in ANY language (English, Chinese, Japanese, Korean, German, French, Spanish, Russian, etc.). DO NOT SKIP, OMIT, OR TRANSLATE THE HEADER!
+2. **CRITICAL: PRESERVE ALL HEADER ROW(S) IN THEIR ORIGINAL LANGUAGE!** The header is the top row(s) with column titles, which may be in ANY language (English, Chinese, Japanese, Korean, German, French, Spanish, Russian, Portuguese, etc.). DO NOT SKIP, OMIT, OR TRANSLATE THE HEADER!
 3. NO EXPLANATIONS - ONLY CSV!
 4. NO MARKDOWN WRAPPING - JUST PLAIN TEXT!
 5. DO NOT STOP MID-WAY! OUTPUT THE COMPLETE TABLE!
 6. OUTPUT EVERYTHING EVEN IF IT'S LONG! COMPLETENESS IS CRITICAL!
-7. The header is the most important part - you MUST include it!
+7. If the table contains a merged title row, caption, or top heading inside the table area, include it as the FIRST row in the CSV in its original language.
+8. Do not ignore text above the column headers when it is clearly the table title or caption.
 
-(This instruction works for tables in ANY language: Chinese, English, Japanese, Korean, German, French, Spanish, Russian, etc.)`
+(This instruction works for tables in ANY language: Chinese, English, Japanese, Korean, German, French, Spanish, Russian, Portuguese, etc.)`
                                 },
                                 {
                                     type: 'image_url',
@@ -417,6 +422,74 @@ STRICT REQUIREMENTS:
                 return content;
             }
             throw new Error('API 返回表格数据为空');
+        }
+
+        /**
+         * 单独识别表格标题/题头，避免模型在只输出 CSV 时忽略表格上方的说明性文本
+         * @param {string} imageDataUrl 图片的 Base64 Data URL
+         * @returns {Promise<string>} 标题文本；若不存在则返回空字符串
+         */
+        async function extractTableTitleFromImage(imageDataUrl) {
+            const apiResponse = await fetchWithTimeout(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: MODEL_NAME,
+                    messages: [
+                        {
+                            role: 'user',
+                            content: [
+                                {
+                                    type: 'text',
+                                    text: `Look at this table image and detect whether there is a table title, caption, or top heading above the column headers.
+
+STRICT REQUIREMENTS:
+1. Output ONLY the table title/caption/top heading text if it exists.
+2. Keep the original language exactly as shown. DO NOT translate.
+3. DO NOT output the column headers or data rows.
+4. If there is no title/caption/top heading above the headers, reply exactly: NO_TABLE_TITLE
+5. Treat centered merged text above the header row as the table title.
+6. This applies to ANY language, including Portuguese, English, Chinese, Japanese, Korean, German, French, Spanish, and Russian.`
+                                },
+                                {
+                                    type: 'image_url',
+                                    image_url: { url: imageDataUrl }
+                                }
+                            ]
+                        }
+                    ],
+                    max_tokens: 512,
+                    temperature: 0.0001
+                })
+            });
+
+            if (!apiResponse.ok) {
+                throw new Error(`表格标题识别失败 (HTTP ${apiResponse.status})`);
+            }
+
+            const data = await apiResponse.json();
+            const content = data?.choices?.[0]?.message?.content?.trim();
+            if (!content || content === 'NO_TABLE_TITLE') {
+                return '';
+            }
+            return content.replace(/^["']|["']$/g, '').trim();
+        }
+
+        /**
+         * 将表格标题作为首行追加到 CSV，避免导出的 Excel 丢失题头信息
+         * @param {string} csvString 原始 CSV
+         * @param {string} title 表格标题
+         * @returns {string} 包含标题首行的 CSV
+         */
+        function prependTitleRowToCsv(csvString, title) {
+            const normalizedCsv = (csvString || '').trim();
+            const normalizedTitle = (title || '').trim();
+            if (!normalizedTitle) {
+                return normalizedCsv;
+            }
+
+            const escapedTitle = '"' + normalizedTitle.replace(/"/g, '""') + '"';
+            return normalizedCsv ? `${escapedTitle}\n${normalizedCsv}` : escapedTitle;
         }
 
         /**
