@@ -166,9 +166,8 @@ http://localhost:8081/v1/chat/completions
 ├── manifest.json         # 扩展清单
 ├── popup.html            # 插件弹窗 UI
 ├── popup.js              # 弹窗按钮交互
-├── xlsx.full.min.js      # SheetJS 库，用于导出 Excel
-└── drink-coffee/         # 打赏资源与说明
-```
+└──xlsx.full.min.js      # SheetJS 库，用于导出 Excel
+ ```
 
 ### 已知限制
 
@@ -203,7 +202,6 @@ http://localhost:8081/v1/chat/completions
 
 如果你喜欢这个项目，请打赏一杯咖啡！谢谢！
 
-也可以通过 PayPal 支持：
 - [PayPal.me/xuxinkuan](https://www.paypal.me/xuxinkuan)
 
 ### 适用场景
