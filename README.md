@@ -50,6 +50,8 @@
 
 #### 1. 准备本地模型服务（新手必看！）
 
+> ⚠️ **超级重要警告！** 如果你要识别超过 12 行的表格，**必须**在启动命令里加 `--n-predict 32768`（或者更大的值）！
+
 ##### 方式一：使用 llama.cpp（推荐，简单快速）
 
 **步骤 1：下载 llama.cpp**
@@ -66,15 +68,15 @@
 2. 下载模型文件 `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`（约 4.5GB）
 3. 把模型文件放到 llama.cpp 的文件夹里（和 `llama-cli.exe` 同级）
 
-**步骤 3：启动模型服务**
+**步骤 3：启动模型服务（最关键！）**
 
 1. 在 llama.cpp 文件夹中，按住 `Shift` 键 + 右键点击空白处，选择"在此处打开 PowerShell 窗口"或"在终端中打开"
 2. 复制粘贴下面的命令并按回车：
 
 ```powershell
 # Windows 示例命令（根据你的实际路径修改）
-# 注意：--n-predict 16384 很重要！允许模型输出更长的内容
-.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 16384
+# ⚠️ 注意：--n-predict 32768 是必须的！否则只能识别 12 行！
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 32768
 ```
 
 **参数说明（小白友好版）：**
@@ -82,7 +84,7 @@
 - `--host 0.0.0.0`：让服务可以从本地访问
 - `--port 8081`：端口号，必须和插件里配置的一样（默认就是 8081）
 - `--threads 8`：使用 8 个 CPU 线程（根据你电脑配置调整，一般是 CPU 核心数）
-- `--n-predict 16384`：**最重要！** 允许模型最多输出 16384 个 token，这样才能识别多行的表格（如果不加这个，默认只能输出很短的内容）
+- `--n-predict 32768`：**超级重要！必须加这个！** 允许模型最多输出 32768 个 token，这样才能识别很多行的表格（如果不加这个，默认只能输出很短的内容，最多 12 行！）
 
 **看到类似下面的输出就表示启动成功了！**
 ```text
@@ -253,6 +255,8 @@ If your endpoint or model name is different, update [`content.js`](file:///e:/pr
 
 #### Step 1: Set up Local Model Service (Beginner Friendly!)
 
+> ⚠️ **Super Important Warning!** If you want to recognize tables with more than 12 rows, **you must** add `--n-predict 32768` (or a larger value) to the startup command!
+
 ##### Option 1: Using llama.cpp (Recommended, Simple & Fast)
 
 **Step 1: Download llama.cpp**
@@ -269,15 +273,15 @@ If your endpoint or model name is different, update [`content.js`](file:///e:/pr
 2. Download the model file `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf` (~4.5GB)
 3. Place the model file in your llama.cpp folder (same level as `llama-cli.exe`)
 
-**Step 3: Start the Model Service**
+**Step 3: Start the Model Service (Most Critical!)**
 
 1. In your llama.cpp folder, hold `Shift` + right-click on empty space, select "Open PowerShell window here" or "Open in Terminal"
 2. Copy and paste the command below and press Enter:
 
 ```powershell
 # Windows example (adjust path as needed)
-# Important: --n-predict 16384 allows longer output for large tables!
-.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 16384
+# ⚠️ Important: --n-predict 32768 is required! Otherwise you can only recognize 12 rows!
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 32768
 ```
 
 **Parameter Explanation (Beginner Friendly):**
@@ -285,7 +289,7 @@ If your endpoint or model name is different, update [`content.js`](file:///e:/pr
 - `--host 0.0.0.0`: Allow local access to the service
 - `--port 8081`: Port number (must match the plugin configuration, default is 8081)
 - `--threads 8`: Use 8 CPU threads (adjust based on your computer, usually your CPU core count)
-- `--n-predict 16384`: **Most important!** Allows the model to output up to 16384 tokens, so it can extract tables with many rows (without this, default output is very short)
+- `--n-predict 32768`: **Super Important! Must add this!** Allows the model to output up to 32768 tokens, so it can extract tables with many rows (without this, default output is very short - only about 12 rows maximum!)
 
 **You'll see something like this when it's ready!**
 ```text

@@ -301,8 +301,8 @@ if (document.getElementById('screenshot-overlay')) {
                             }
                         ]
                     }],
-                    max_tokens: 16384,
-                    temperature: 0.1
+                    max_tokens: 32768,
+                    temperature: 0.05
                 })
             });
 
@@ -341,7 +341,7 @@ if (document.getElementById('screenshot-overlay')) {
 ${sourceText}`
                         }
                     ],
-                    max_tokens: 16384,
+                    max_tokens: 32768,
                     temperature: 0.3,
                     repeat_penalty: 1.1,
                     frequency_penalty: 0.2
@@ -373,7 +373,7 @@ ${sourceText}`
                         content: [
                             {
                                 type: 'text',
-                                text: '请将图片中的表格准确无误地提取出来，必须使用标准的纯 CSV（逗号分隔值）格式输出。特别注意：\\n1. 必须准确识别并保留表头（第一行或前几行的标题行）！\\n2. 表头是表格最重要的部分，绝对不能漏掉！\\n3. 必须识别完整的表格，无论有多少行都要全部提取！\\n4. 不要有任何多余解释说明文字。\\n5. 不要使用 ```csv 等 Markdown 代码块语法包裹，只返回干净的文本！\\n6. 每一个单元格数据用英文逗号分隔，如果有空单元格，必须保留对应的逗号占位。\\n7. 坚决不能漏掉表格原有的行和列。'
+                                text: '请将图片中的表格准确无误地完整提取出来，必须使用标准的纯 CSV（逗号分隔值）格式输出。特别注意：\\n1. 必须准确识别并保留表头（第一行或前几行的标题行）！\\n2. 表头是表格最重要的部分，绝对不能漏掉！\\n3. 必须识别完整的表格，无论图片中有多少行数据，都要一行不漏地全部提取出来！即使表格很长也必须完整输出！\\n4. 不要有任何多余解释说明文字。\\n5. 不要使用 ```csv 等 Markdown 代码块语法包裹，只返回干净的文本！\\n6. 每一个单元格数据用英文逗号分隔，如果有空单元格，必须保留对应的逗号占位。\\n7. 坚决不能漏掉表格原有的任何一行或一列！完整性是最重要的！'
                             },
                             {
                                 type: 'image_url',
@@ -381,8 +381,8 @@ ${sourceText}`
                             }
                         ]
                     }],
-                    max_tokens: 16384,
-                    temperature: 0.1
+                    max_tokens: 32768,
+                    temperature: 0.05
                 })
             });
 
@@ -390,9 +390,15 @@ ${sourceText}`
             
             const data = await apiResponse.json();
             if (data.choices && data.choices.length > 0) {
-                // 深度容错：清除模型犯贱加上的 markdown 边界
                 let content = data.choices[0].message.content.trim();
+                
+                // 清除可能的 markdown 边界
                 content = content.replace(/^```(csv|text)?\\n/i, '').replace(/\\n```$/i, '');
+                
+                // 调试信息：检测输出长度
+                const lineCount = content.split('\\n').length;
+                console.log('[表格识别] 识别到 ' + lineCount + ' 行数据');
+                
                 return content;
             }
             throw new Error('API 返回表格数据为空');
