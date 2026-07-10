@@ -73,23 +73,23 @@ if (document.getElementById('screenshot-overlay')) {
         `);
         overlay.id = 'screenshot-overlay';
 
-        // 顶部提示文字
+        // 提示文字（更不显眼）
         const hint = createStyledElement('div', `
             position: fixed !important;
-            top: 20px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            background: ${THEME_COLOR} !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: rgba(0, 0, 0, 0.7) !important;
             color: white !important;
-            padding: 12px 28px !important;
-            border-radius: 8px !important;
-            font-size: 15px !important;
+            padding: 8px 16px !important;
+            border-radius: 6px !important;
+            font-size: 13px !important;
             z-index: 2147483647 !important;
             font-family: 'Microsoft YaHei', sans-serif !important;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
             pointer-events: none !important;
+            transition: opacity 0.2s ease !important;
         `);
-        hint.textContent = '🖱️ 拖拽鼠标选择要翻译的区域（按 ESC 取消）';
+        hint.textContent = '拖拽选择区域 | ESC 取消';
 
         // 选择框（虚线）
         const selection = createStyledElement('div', `
@@ -123,6 +123,7 @@ if (document.getElementById('screenshot-overlay')) {
             selection.style.width = '0';
             selection.style.height = '0';
             selection.style.display = 'block';
+            hint.style.opacity = '0'; // 拖拽时隐藏提示
             e.preventDefault();
             e.stopPropagation();
         });
