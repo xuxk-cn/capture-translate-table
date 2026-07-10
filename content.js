@@ -301,7 +301,7 @@ if (document.getElementById('screenshot-overlay')) {
                             }
                         ]
                     }],
-                    max_tokens: 4096,
+                    max_tokens: 16384,
                     temperature: 0.1
                 })
             });
@@ -341,7 +341,7 @@ if (document.getElementById('screenshot-overlay')) {
 ${sourceText}`
                         }
                     ],
-                    max_tokens: 4096,
+                    max_tokens: 16384,
                     temperature: 0.3,
                     repeat_penalty: 1.1,
                     frequency_penalty: 0.2

@@ -73,7 +73,8 @@
 
 ```powershell
 # Windows 示例命令（根据你的实际路径修改）
-.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8
+# 注意：--n-predict 16384 很重要！允许模型输出更长的内容
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 16384
 ```
 
 **参数说明（小白友好版）：**
@@ -81,6 +82,7 @@
 - `--host 0.0.0.0`：让服务可以从本地访问
 - `--port 8081`：端口号，必须和插件里配置的一样（默认就是 8081）
 - `--threads 8`：使用 8 个 CPU 线程（根据你电脑配置调整，一般是 CPU 核心数）
+- `--n-predict 16384`：**最重要！** 允许模型最多输出 16384 个 token，这样才能识别多行的表格（如果不加这个，默认只能输出很短的内容）
 
 **看到类似下面的输出就表示启动成功了！**
 ```text
@@ -274,7 +276,8 @@ If your endpoint or model name is different, update [`content.js`](file:///e:/pr
 
 ```powershell
 # Windows example (adjust path as needed)
-.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8
+# Important: --n-predict 16384 allows longer output for large tables!
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8 --n-predict 16384
 ```
 
 **Parameter Explanation (Beginner Friendly):**
@@ -282,6 +285,7 @@ If your endpoint or model name is different, update [`content.js`](file:///e:/pr
 - `--host 0.0.0.0`: Allow local access to the service
 - `--port 8081`: Port number (must match the plugin configuration, default is 8081)
 - `--threads 8`: Use 8 CPU threads (adjust based on your computer, usually your CPU core count)
+- `--n-predict 16384`: **Most important!** Allows the model to output up to 16384 tokens, so it can extract tables with many rows (without this, default output is very short)
 
 **You'll see something like this when it's ready!**
 ```text
