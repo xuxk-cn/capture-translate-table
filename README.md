@@ -206,8 +206,6 @@ http://localhost:8081/v1/chat/completions
 也可以通过 PayPal 支持：
 - [PayPal.me/xuxinkuan](https://www.paypal.me/xuxinkuan)
 
-相关资源位于 [`drink-coffee`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/drink-coffee) 目录。
-
 ### 适用场景
 
 - 阅读外语网页时快速截图翻译
