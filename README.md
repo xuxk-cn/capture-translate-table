@@ -202,6 +202,11 @@ http://localhost:8081/v1/chat/completions
 
 如果你喜欢这个项目，请打赏一杯咖啡！谢谢！
 
+| 微信支付 | 支付宝支付 |
+| :-----: | :------: |
+| <img src="微信收款码.png" alt="微信收款码" width="200"> | <img src="支付宝收款码.jpg" alt="支付宝收款码" width="200"> |
+
+也可以通过 PayPal 支持：
 - [PayPal.me/xuxinkuan](https://www.paypal.me/xuxinkuan)
 
 ### 适用场景
