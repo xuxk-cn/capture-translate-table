@@ -379,13 +379,14 @@ ${sourceText}`
 
 STRICT REQUIREMENTS:
 1. Extract EVERY SINGLE ROW from the table - NO ROWS LEFT BEHIND!
-2. Preserve the header row(s)!
+2. **CRITICAL: PRESERVE ALL HEADER ROW(S) IN THEIR ORIGINAL LANGUAGE!** The header is the top row(s) with column titles, which may be in ANY language (English, Chinese, Japanese, Korean, German, French, Spanish, Russian, etc.). DO NOT SKIP, OMIT, OR TRANSLATE THE HEADER!
 3. NO EXPLANATIONS - ONLY CSV!
 4. NO MARKDOWN WRAPPING - JUST PLAIN TEXT!
 5. DO NOT STOP MID-WAY! OUTPUT THE COMPLETE TABLE!
 6. OUTPUT EVERYTHING EVEN IF IT'S LONG! COMPLETENESS IS CRITICAL!
+7. The header is the most important part - you MUST include it!
 
-(This instruction works for tables in ANY language: Chinese, English, Japanese, Korean, etc.)`
+(This instruction works for tables in ANY language: Chinese, English, Japanese, Korean, German, French, Spanish, Russian, etc.)`
                                 },
                                 {
                                     type: 'image_url',
