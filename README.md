@@ -48,10 +48,58 @@
 
 ### 安装方式
 
-#### 1. 准备本地模型服务
+#### 1. 准备本地模型服务（新手必看！）
 
-你需要先启动一个兼容 OpenAI Chat Completions 协议的本地视觉模型服务，并确保下面这个接口可访问：
+##### 方式一：使用 llama.cpp（推荐，简单快速）
 
+**步骤 1：下载 llama.cpp**
+
+1. 访问 llama.cpp 的 GitHub 发布页：https://github.com/ggerganov/llama.cpp/releases
+2. 下载适合你系统的版本（Windows 用户下载 `llama-b*-bin-win-*.zip`）
+3. 解压到一个你容易找到的文件夹（比如 `D:\llama.cpp`）
+
+**步骤 2：下载 Qwen2.5-VL 模型**
+
+1. 访问模型下载页面（推荐 Hugging Face）：
+   - 搜索 `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`
+   - 或者直接访问：https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct-GGUF
+2. 下载模型文件 `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`（约 4.5GB）
+3. 把模型文件放到 llama.cpp 的文件夹里（和 `llama-cli.exe` 同级）
+
+**步骤 3：启动模型服务**
+
+1. 在 llama.cpp 文件夹中，按住 `Shift` 键 + 右键点击空白处，选择"在此处打开 PowerShell 窗口"或"在终端中打开"
+2. 复制粘贴下面的命令并按回车：
+
+```powershell
+# Windows 示例命令（根据你的实际路径修改）
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8
+```
+
+**参数说明（小白友好版）：**
+- `-m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`：指定要加载的模型文件名
+- `--host 0.0.0.0`：让服务可以从本地访问
+- `--port 8081`：端口号，必须和插件里配置的一样（默认就是 8081）
+- `--threads 8`：使用 8 个 CPU 线程（根据你电脑配置调整，一般是 CPU 核心数）
+
+**看到类似下面的输出就表示启动成功了！**
+```text
+...
+HTTP server listening at http://0.0.0.0:8081
+...
+```
+
+**步骤 4：测试服务是否正常**
+
+保持这个窗口不要关闭！打开浏览器访问：`http://localhost:8081`，如果能看到页面就说明服务正常了。
+
+---
+
+##### 方式二：其他 OpenAI 兼容服务
+
+如果你已经有其他兼容 OpenAI Chat Completions 协议的本地视觉模型服务，也可以直接使用。
+
+确保接口地址可访问：
 ```text
 http://localhost:8081/v1/chat/completions
 ```
@@ -200,6 +248,64 @@ http://localhost:8081/v1/chat/completions
 If your endpoint or model name is different, update [`content.js`](file:///e:/projects/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/browser-extension+%E8%A1%A8%E6%A0%BC%E8%AF%86%E5%88%AB/content.js#L20-L21).
 
 ### Installation
+
+#### Step 1: Set up Local Model Service (Beginner Friendly!)
+
+##### Option 1: Using llama.cpp (Recommended, Simple & Fast)
+
+**Step 1: Download llama.cpp**
+
+1. Go to llama.cpp GitHub releases: https://github.com/ggerganov/llama.cpp/releases
+2. Download the version for your system (Windows users download `llama-b*-bin-win-*.zip`)
+3. Extract it to a folder you can easily find (e.g., `D:\llama.cpp`)
+
+**Step 2: Download Qwen2.5-VL Model**
+
+1. Visit the model download page (Hugging Face recommended):
+   - Search for `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`
+   - Or go directly: https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct-GGUF
+2. Download the model file `Qwen2.5-VL-7B-Instruct-q4_k_m.gguf` (~4.5GB)
+3. Place the model file in your llama.cpp folder (same level as `llama-cli.exe`)
+
+**Step 3: Start the Model Service**
+
+1. In your llama.cpp folder, hold `Shift` + right-click on empty space, select "Open PowerShell window here" or "Open in Terminal"
+2. Copy and paste the command below and press Enter:
+
+```powershell
+# Windows example (adjust path as needed)
+.\llama-server.exe -m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf --host 0.0.0.0 --port 8081 --threads 8
+```
+
+**Parameter Explanation (Beginner Friendly):**
+- `-m Qwen2.5-VL-7B-Instruct-q4_k_m.gguf`: The model file name to load
+- `--host 0.0.0.0`: Allow local access to the service
+- `--port 8081`: Port number (must match the plugin configuration, default is 8081)
+- `--threads 8`: Use 8 CPU threads (adjust based on your computer, usually your CPU core count)
+
+**You'll see something like this when it's ready!**
+```text
+...
+HTTP server listening at http://0.0.0.0:8081
+...
+```
+
+**Step 4: Test if the Service is Working**
+
+Keep this window open! Open your browser and visit: `http://localhost:8081`. If you see a page, the service is working!
+
+---
+
+##### Option 2: Other OpenAI Compatible Services
+
+If you already have another OpenAI Chat Completions compatible local vision model service, you can use that directly.
+
+Ensure the endpoint is accessible:
+```text
+http://localhost:8081/v1/chat/completions
+```
+
+#### Step 2: Load the Extension Locally
 
 1. Start your local AI model service
 2. Open the extensions page in your browser
