@@ -134,10 +134,50 @@
             font-size: 12px;
             color: #777;
         }
+
+        .language-selector {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .language-selector label {
+            font-size: 13px;
+            color: #555;
+        }
+
+        #language-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #d0d7de;
+            font-size: 13px;
+            cursor: pointer;
+            background: white;
+        }
+
+        #language-select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
     </style>
 </head>
 <body>
-    <h2>📸 截图翻译与表格</h2>
+    <div class="language-selector">
+        <label for="language-select">🌐</label>
+        <select id="language-select">
+            <option value="zh-CN">中文</option>
+            <option value="en-US">English</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="fr-FR">Français</option>
+            <option value="es-ES">Español</option>
+            <option value="ja-JP">日本語</option>
+            <option value="ko-KR">한국어</option>
+            <option value="ru-RU">Русский</option>
+        </select>
+    </div>
+    <h2 id="main-title">📸 截图翻译与表格</h2>
     <button id="capture-btn">🖱️ 截图并翻译</button>
     <button id="capture-table-btn">📊 截取表格转Excel</button>
     <div id="status"></div>
