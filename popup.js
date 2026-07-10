@@ -162,11 +162,11 @@ const translations = {
 
 const donateMethods = {
     wechat: {
-        src: 'drink-coffee/收款码.png',
+        src: '微信收款码.png',
         alt: '微信收款码'
     },
     alipay: {
-        src: 'drink-coffee/支付宝收款码.jpg',
+        src: '支付宝收款码.jpg',
         alt: '支付宝收款码'
     }
 };
