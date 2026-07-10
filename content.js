@@ -375,15 +375,17 @@ ${sourceText}`
                             content: [
                                 {
                                     type: 'text',
-                                    text: `你是一个专业的表格数据提取专家。请将图片中的表格以 CSV 格式完整提取出来。
+                                    text: `You are a professional table data extraction expert. Extract the entire table from the image in CSV format.
 
-严格要求（不遵守会导致严重后果）：
-1. 必须提取图片中表格的所有行，一行都不能少！即使表格有 100 行也要全部提取！
-2. 保留表头！
-3. 不要有任何解释文字，只给我 CSV！
-4. 不要用 Markdown 包裹，直接给我纯文本！
-5. 不要中途停止！必须输出完整！
-6. 即使输出很长也要继续输出！完整性高于一切！`
+STRICT REQUIREMENTS:
+1. Extract EVERY SINGLE ROW from the table - NO ROWS LEFT BEHIND!
+2. Preserve the header row(s)!
+3. NO EXPLANATIONS - ONLY CSV!
+4. NO MARKDOWN WRAPPING - JUST PLAIN TEXT!
+5. DO NOT STOP MID-WAY! OUTPUT THE COMPLETE TABLE!
+6. OUTPUT EVERYTHING EVEN IF IT'S LONG! COMPLETENESS IS CRITICAL!
+
+(This instruction works for tables in ANY language: Chinese, English, Japanese, Korean, etc.)`
                                 },
                                 {
                                     type: 'image_url',
