@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+node_modules/
+dist/
+build/
+
+__pycache__/
+*.pyc
+*.pyo
+
+.idea/
+.vscode/

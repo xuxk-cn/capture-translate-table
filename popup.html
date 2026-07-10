@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 320px;
+            padding: 18px;
+            margin: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            text-align: center;
+            background: #f7f8fa;
+            color: #222;
+        }
+        h2 { margin: 0 0 18px 0; font-size: 18px; }
+        #capture-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #capture-btn:hover { background: #45a049; }
+        #capture-btn:disabled { background: #ccc; cursor: not-allowed; }
+        
+        #capture-table-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        #capture-table-btn:hover { background: #1976D2; }
+        #capture-table-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        #status {
+            margin-top: 15px;
+            min-height: 18px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .support-box {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        #donate-toggle-btn {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #8a5a00;
+            background: #fff4d6;
+            border: 1px solid #f2d182;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #donate-toggle-btn:hover {
+            background: #ffefc2;
+        }
+
+        #donate-panel {
+            margin-top: 12px;
+            padding: 14px 12px 12px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .support-text {
+            margin: 0 0 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .pay-switcher {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .pay-btn {
+            flex: 1;
+            padding: 8px 0;
+            border: 1px solid #d0d7de;
+            border-radius: 999px;
+            background: #f6f8fa;
+            color: #444;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .pay-btn.active {
+            color: #fff;
+            background: #ff9800;
+            border-color: #ff9800;
+        }
+
+        #donate-qr {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            margin: 0 auto 10px;
+            border-radius: 8px;
+            border: 1px solid #ececec;
+            background: #fff;
+        }
+
+        #donate-title {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #donate-tip {
+            margin: 6px 0 0;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h2>📸 截图翻译与表格</h2>
+    <button id="capture-btn">🖱️ 截图并翻译</button>
+    <button id="capture-table-btn">📊 截取表格转Excel</button>
+    <div id="status"></div>
+    <div class="support-box">
+        <button id="donate-toggle-btn" type="button">☕ 请作者喝杯咖啡</button>
+        <div id="donate-panel" class="hidden">
+            <p class="support-text">如果这个插件对你有帮助，欢迎扫码支持一下，能让我继续把它打磨得更顺手。</p>
+            <div class="pay-switcher">
+                <button id="wechat-pay-btn" class="pay-btn active" type="button">微信</button>
+                <button id="alipay-pay-btn" class="pay-btn" type="button">支付宝</button>
+            </div>
+            <img id="donate-qr" src="drink-coffee/收款码.png" alt="微信收款码">
+            <p id="donate-title">微信扫码打赏</p>
+            <p id="donate-tip">打开手机扫一扫即可</p>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

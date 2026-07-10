@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "截图翻译",
+  "version": "1.0",
+  "description": "一键截图翻译",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:8081/*",
+    "http://127.0.0.1:8081/*",
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
