@@ -36,7 +36,6 @@
 - 🏷️ 自动识别并保留表格标题/题头
 - 🌍 多语言表头支持（中文/英文/日文/韩文/德文/法文/西班牙文/葡萄牙文/俄文）
 - 支持结果复制
-- 支持在插件弹窗中显示打赏二维码
 
 ### 当前实现说明
 
@@ -244,7 +243,6 @@ The extension lets the user drag a rectangle over any visible area of a webpage,
 - 🏷️ Auto-detect and preserve table title/caption
 - 🌍 Multi-language header support (Chinese/English/Japanese/Korean/German/French/Spanish/Portuguese/Russian)
 - Copy results from the result dialog
-- Built-in donation panel in the popup
 
 ### Requirements
 
@@ -399,7 +397,6 @@ Der Benutzer waehlt einen Bereich auf der Webseite per Ziehen aus. Die Erweiteru
 - Anzeige der Uebersetzung direkt auf der Seite
 - Extraktion von Tabellen und Export nach Excel
 - Kopieren des Ergebnisses
-- Spendenbereich im Popup
 
 ### Voraussetzungen
 
@@ -461,7 +458,6 @@ L'utilisateur selectionne une zone visible de la page. L'extension capture cette
 - Traduction affichee directement dans la page
 - Extraction de tableaux et export vers Excel
 - Copie du resultat
-- Zone de soutien dans la fenetre popup
 
 ### Prerequis
 
@@ -523,7 +519,6 @@ El usuario arrastra para seleccionar una zona visible de la pagina. La extension
 - Traduccion mostrada directamente en la pagina
 - Extraccion de tablas y exportacion a Excel
 - Copia del resultado
-- Panel de apoyo en la ventana emergente
 
 ### Requisitos
 
